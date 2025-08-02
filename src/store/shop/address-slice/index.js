@@ -10,10 +10,9 @@ export const addNewAddress = createAsyncThunk(
   "/addresses/addNewAddress",
   async (formData) => {
     const response = await axios.post(
-      "http://localhost:5000/api/shop/address/add",
+      "https://e-commurce-server.onrender.com/api/shop/address/add",
       formData
     );
-
     return response.data;
   }
 );
@@ -22,21 +21,19 @@ export const fetchAllAddresses = createAsyncThunk(
   "/addresses/fetchAllAddresses",
   async (userId) => {
     const response = await axios.get(
-      `http://localhost:5000/api/shop/address/get/${userId}`
+      `https://e-commurce-server.onrender.com/api/shop/address/get/${userId}`
     );
-
     return response.data;
   }
 );
 
-export const editaAddress = createAsyncThunk(
-  "/addresses/editaAddress",
+export const editAddress = createAsyncThunk( // ✅ fixed name here
+  "/addresses/editAddress",
   async ({ userId, addressId, formData }) => {
     const response = await axios.put(
-      `http://localhost:5000/api/shop/address/update/${userId}/${addressId}`,
+      `https://e-commurce-server.onrender.com/api/shop/address/update/${userId}/${addressId}`,
       formData
     );
-
     return response.data;
   }
 );
@@ -45,9 +42,8 @@ export const deleteAddress = createAsyncThunk(
   "/addresses/deleteAddress",
   async ({ userId, addressId }) => {
     const response = await axios.delete(
-      `http://localhost:5000/api/shop/address/delete/${userId}/${addressId}`
+      `https://e-commurce-server.onrender.com/api/shop/address/delete/${userId}/${addressId}`
     );
-
     return response.data;
   }
 );
@@ -61,7 +57,7 @@ const addressSlice = createSlice({
       .addCase(addNewAddress.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(addNewAddress.fulfilled, (state, action) => {
+      .addCase(addNewAddress.fulfilled, (state) => {
         state.isLoading = false;
       })
       .addCase(addNewAddress.rejected, (state) => {
@@ -77,6 +73,26 @@ const addressSlice = createSlice({
       .addCase(fetchAllAddresses.rejected, (state) => {
         state.isLoading = false;
         state.addressList = [];
+      })
+      // ✅ Handle editAddress
+      .addCase(editAddress.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(editAddress.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(editAddress.rejected, (state) => {
+        state.isLoading = false;
+      })
+      // ✅ Handle deleteAddress
+      .addCase(deleteAddress.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteAddress.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(deleteAddress.rejected, (state) => {
+        state.isLoading = false;
       });
   },
 });
