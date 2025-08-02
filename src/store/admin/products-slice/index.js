@@ -13,7 +13,7 @@ export const addNewProduct = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://e-commurce-server.onrender.com/api/admin/products/add",
+        "http://localhost:5000/api/admin/products/add",
         formData,
         {
           headers: {
@@ -34,7 +34,7 @@ export const fetchAllProducts = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        "https://e-commurce-server.onrender.com/api/admin/products/get"
+        "http://localhost:5000/api/admin/products/get"
       );
       return response.data;
     } catch (error) {
@@ -49,7 +49,7 @@ export const editProduct = createAsyncThunk(
   async ({ id, formData }, { rejectWithValue }) => {
     try {
       const response = await axios.put(
-        `https://e-commurce-server.onrender.com/api/admin/products/edit/${id}`,
+        `http://localhost:5000/api/admin/products/edit/${id}`,
         formData,
         {
           headers: {
@@ -70,7 +70,7 @@ export const deleteProduct = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `https://e-commurce-server.onrender.com/api/admin/products/delete/${id}`
+        `http://localhost:5000/api/admin/products/delete/${id}`
       );
       return response.data;
     } catch (error) {

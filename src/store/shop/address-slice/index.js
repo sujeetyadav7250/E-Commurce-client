@@ -11,7 +11,7 @@ export const addNewAddress = createAsyncThunk(
   "/addresses/addNewAddress",
   async (formData) => {
     const response = await axios.post(
-      "https://e-commurce-server.onrender.com/api/shop/address/add",
+      "http://localhost:5000/api/shop/address/add",
       formData
     );
     return response.data;
@@ -22,7 +22,7 @@ export const fetchAllAddresses = createAsyncThunk(
   "/addresses/fetchAllAddresses",
   async (userId) => {
     const response = await axios.get(
-      `https://e-commurce-server.onrender.com/api/shop/address/get/${userId}`
+      `http://localhost:5000/api/shop/address/get/${userId}`
     );
     return response.data;
   }
@@ -32,7 +32,7 @@ export const editAddress = createAsyncThunk(
   "/addresses/editAddress",
   async ({ userId, addressId, formData }) => {
     const response = await axios.put(
-      `https://e-commurce-server.onrender.com/api/shop/address/update/${userId}/${addressId}`,
+      `http://localhost:5000/api/shop/address/update/${userId}/${addressId}`,
       formData
     );
     return response.data;
@@ -43,7 +43,7 @@ export const deleteAddress = createAsyncThunk(
   "/addresses/deleteAddress",
   async ({ userId, addressId }) => {
     const response = await axios.delete(
-      `https://e-commurce-server.onrender.com/api/shop/address/delete/${userId}/${addressId}`
+      `http://localhost:5000/api/shop/address/delete/${userId}/${addressId}`
     );
     return response.data;
   }

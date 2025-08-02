@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BASE_URL = "https://e-commurce-server.onrender.com/api/auth";
+const BASE_URL = "http://localhost:5000/api/auth";
 
 const initialState = {
   isAuthenticated: false,
