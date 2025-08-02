@@ -6,6 +6,7 @@ const initialState = {
   addressList: [],
 };
 
+// ✅ Thunks exported inline to avoid duplication
 export const addNewAddress = createAsyncThunk(
   "/addresses/addNewAddress",
   async (formData) => {
@@ -27,7 +28,7 @@ export const fetchAllAddresses = createAsyncThunk(
   }
 );
 
-export const editAddress = createAsyncThunk( // ✅ fixed name here
+export const editAddress = createAsyncThunk(
   "/addresses/editAddress",
   async ({ userId, addressId, formData }) => {
     const response = await axios.put(
@@ -74,7 +75,6 @@ const addressSlice = createSlice({
         state.isLoading = false;
         state.addressList = [];
       })
-      // ✅ Handle editAddress
       .addCase(editAddress.pending, (state) => {
         state.isLoading = true;
       })
@@ -84,7 +84,6 @@ const addressSlice = createSlice({
       .addCase(editAddress.rejected, (state) => {
         state.isLoading = false;
       })
-      // ✅ Handle deleteAddress
       .addCase(deleteAddress.pending, (state) => {
         state.isLoading = true;
       })
@@ -97,4 +96,5 @@ const addressSlice = createSlice({
   },
 });
 
+// ✅ Default export of reducer
 export default addressSlice.reducer;
